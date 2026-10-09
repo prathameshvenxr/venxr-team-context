@@ -14,16 +14,19 @@ Vajra Alert notification mail" (`86d42kb9n`). The sign-up and alert mails said "
 | llm_service | `97f15ae` | Unrelated Docker-build fix: `pydantic>=2.0,<2.14` (see `requirements/README.md`) |
 
 ## How the switch works
-- **Backends (auth, utility, llm_service):** env var `PRODUCT_NAME`. Unset or blank keeps the original text exactly
-  ("Venxr" in auth, "VenXR" in utility and llm_service). Set `PRODUCT_NAME=Vajra` on Vajra.
+- **Backends (auth, utility, llm_service):** the name is `PRODUCT_NAME` if set; otherwise **`APP_BRAND=vajra` gives
+  "Vajra"**; otherwise the original text exactly ("Venxr" in auth, "VenXR" in utility and llm_service). So the
+  `APP_BRAND=vajra` the Vajra deployments already set is enough; `PRODUCT_NAME` is only needed for a custom name or
+  to override. `APP_BRAND` matches case-insensitively and ignores surrounding spaces; any other value keeps the default.
+  (In code the constant is `APP_NAME` on dev and on the main branches, `PRODUCT_NAME` on the staging branches.)
 - **Frontend:** `VITE_APP_BRAND=vajra` at build time, or a hostname containing "vajra" (`shared/lib/branding.ts`).
-- **Default Governance mail** (utility-service) has its own older switch, `APP_BRAND`, and shows "WPP Vajra".
-  It was deliberately left alone, so on Vajra that one mail still needs `APP_BRAND=vajra`.
+- **Default Governance mail** (utility-service) has always used `APP_BRAND` and shows the "WPP Vajra" lockup. It was
+  not changed. The campaign alert mails now follow the same `APP_BRAND=vajra`, but show "Vajra" (not "WPP Vajra").
 - The name goes into `.format()` templates and HTML mail, so braces are escaped and the alert mails HTML-escape it.
 
 ## Checklist per Vajra instance (dev, staging, prod)
-- [ ] `PRODUCT_NAME=Vajra` on auth, utility-service (**including the Celery/email workers that send alerts**) and llm_service
-- [ ] `APP_BRAND=vajra` on utility-service for the Default Governance mail
+- [ ] `APP_BRAND=vajra` on auth, utility-service (**including the Celery/email workers that send alerts**) and llm_service
+      (this alone selects "Vajra"; set `PRODUCT_NAME` only to override the name)
 - [ ] Frontend build has `VITE_APP_BRAND=vajra` (the prod workflow sets it; dev and staging rely on the hostname)
 - [ ] `SYSTEM_ADMIN_EMAILS`: the code default lists Venxr staff, which would make them system admins on Vajra
 - [ ] `LIMIT_REQUEST_NOTIFY_EMAIL`: default is a Venxr address, so Vajra limit requests would go to Venxr
