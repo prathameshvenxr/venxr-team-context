@@ -9,7 +9,7 @@ Write the code a careful senior engineer would: the smallest change that works, 
 
 ## Workspace ground rules
 - `<workspace>` is **not** a git repo. Every top-level folder is its own GitHub repo (org `Venh-Analytics-Pvt-Ltd`), mostly on branch `venxr_v2` (`main` for `shared_components`, `venxr_backend-infra`, `venxr-wiki`). A change spanning services = several repos, several PRs, and a deploy order. Say so up front.
-- Branch roles: `venxr_v2` is **dev** (confirmed by the team). Staging/prod branch names exist (`venxr_v2_staging`, `venxr_v2_main`) but their mapping to environments is not recorded here: confirm before relying on it.
+- Branch roles: `venxr_v2` is **dev** (confirmed by the team), `venxr_v2_staging` is **staging** and `venxr_v2_main` is **prod** (read from the repos' build workflows, which trigger on exactly those branches). A push to one builds and auto-deploys to both Venxr and Vajra for that environment. See `adsgpt-branch-flow` for how fixes reach them.
 - Two deployments (Venxr, Vajra) x three environments (dev, staging, prod) = 6 instances, built from the same code. Anything user-visible that names the product must come from config, never a literal (see `references/contracts.md`, "Product name").
 - **Read-only by default.** Only write files in the codebase when the user explicitly asked for a code change. Plans, diagrams, notes and analysis go to the session scratchpad (or where the user says), never into a repo tree. Subagents you spawn for analysis must be told they are read-only.
 - Commit or push only when asked. Never edit an applied migration.
@@ -73,4 +73,5 @@ Plan steps verified, diff holds only requested lines, every matching checklist i
 
 ## Related in this plugin
 - `adsgpt-loop`: the same rules run as a bounded loop (understand, blast radius, minimal edit, verify, repeat) with the ponytail ladder built in. Use it for any change that needs a verified result.
+- `adsgpt-branch-flow`: how a fix is shipped across environments (bugfix branch from `venxr_v2_main`, then `<bugfix branch>_staging` from `venxr_v2_staging`, cherry-picked, verified, pushed). Use it whenever the user asks to put a fix on main or staging.
 - `adsgpt-security-reviewer` agent (`/adsgpt-security-review`): read-only security pass tuned to this stack. Run it before finishing changes to auth, gateway, skill_service, sandbox, governance writes, secrets or mail.

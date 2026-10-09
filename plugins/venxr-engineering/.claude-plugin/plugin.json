@@ -1,7 +1,7 @@
 {
   "name": "venxr-engineering",
-  "version": "0.1.0",
-  "description": "adsgpt/Venxr workspace rules and architecture map, a loop-driven development skill built on them and on ponytail, and a read-only security reviewer agent adapted from ECC.",
+  "version": "0.2.0",
+  "description": "adsgpt/Venxr workspace rules and architecture map, a loop-driven development skill built on them and on ponytail, and a read-only security reviewer agent adapted from ECC, and the team's branch flow for shipping a fix to main and staging.",
   "author": { "name": "Venxr engineering" },
   "keywords": ["venxr", "adsgpt", "vajra", "loop", "security-review", "ponytail"]
 }

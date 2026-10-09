@@ -9,14 +9,15 @@ code. Each of the ten deployable repos checked (frontend, gateway, auth, llm_ser
 meta_mcp, tv_planner) has all six deploy workflows (`deploy-venxr-dev.yml` through `deploy-vajra-prod.yml`) on `venxr_v2`.
 Anything that differs per deployment (product name, admin list, mail sender, storage backend) must come from env.
 
-Branches: `venxr_v2` is **dev** (confirmed). `venxr_v2_staging` and `venxr_v2_main` exist in the repos, but which
-environment each one deploys is not recorded here: **confirm and fill in** before anyone relies on it.
+Branches: `venxr_v2` is **dev** (confirmed by the team). `venxr_v2_staging` is staging and `venxr_v2_main` is prod,
+read from each repo's build workflows (`build-dev.yml`, `build-staging.yml`, `build-prod.yml` trigger on exactly
+those branches). A push to one of them builds and auto-deploys to both Venxr and Vajra for that environment.
 
 | Environment | Branch | Confirmed |
 |---|---|---|
 | dev | `venxr_v2` | yes |
-| staging | _TBD_ (`venxr_v2_staging`?) | no |
-| prod | _TBD_ (`venxr_v2_main`?) | no |
+| staging | `venxr_v2_staging` | yes (build workflows) |
+| prod | `venxr_v2_main` | yes (build workflows) |
 
 ## Repos
 | Repo | Role | Snapshot branch |

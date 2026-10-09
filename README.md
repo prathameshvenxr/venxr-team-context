@@ -23,8 +23,10 @@ enforces it, and a snapshot of every service's dependencies so the team can sort
 | Skill `adsgpt-engineering` | Rules, architecture map and cross-repo contracts. Load before touching any service. Includes per-area references (llm_service, governance, MCP, edge services, frontend, contracts, known issues) |
 | Skill `adsgpt-loop` | The same rules as a **bounded loop**: frame, understand, blast radius, smallest edit, verify, decide, with a visible ledger, a budget, and a hard stop after two failures of one idea. The ponytail "laziest thing that works" ladder is built in |
 | Agent `adsgpt-security-reviewer` | **Read-only** security review tuned to this stack (gateway/JWT/service keys, impersonation, tool write-gating, raw SQL, SSRF, sandbox, mail, per-deployment env defaults). Labels findings NEW / KNOWN / UNVERIFIED |
+| Skill `adsgpt-branch-flow` | The Git flow for shipping a fix across environments: a bugfix branch cut from `venxr_v2_main`, then `<bugfix branch>_staging` cut from `venxr_v2_staging`, the same commits cherry-picked onto each, verified, pushed. Never pushes to an environment branch or opens/merges PRs unless asked |
 | Command `/adsgpt-loop <task>` | Start the loop on a task |
 | Command `/adsgpt-security-review [repo or path]` | Run the reviewer on the current diff |
+| Command `/adsgpt-branch-flow <bugfix-branch> [shas] [repos]` | Ship a fix to main then staging with the cherry-pick flow |
 
 ### Install
 Teammates need read access to this repo and `gh auth login` (or an equivalent git credential).
@@ -43,4 +45,4 @@ The guide refers to the folder that holds all the repos as `<workspace>`; it doe
   2026-10-01, nothing run), the ponytail skill and ECC's security reviewer. **They have not been exercised on a real
   task yet**, so expect to tune the wording once the team has used them.
 - The `adsgpt-engineering` references can be stale. Trust the code over them, and update the date when you verify a fact.
-- Staging and prod branch mapping is not recorded: see `docs/workspace-map.md`.
+- Branch roles (dev `venxr_v2`, staging `venxr_v2_staging`, prod `venxr_v2_main`) come from the repos' build workflows: see `docs/workspace-map.md`.
