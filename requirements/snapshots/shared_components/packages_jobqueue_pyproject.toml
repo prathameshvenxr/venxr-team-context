@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "venxr-jobqueue"
+version = "0.1.0"
+description = "Reusable durable job-queue primitives (Celery + Redis) for Venxr services — fan-out/fan-in, dedup, status tracking, pub/sub notifications."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "celery>=5.3",
+    "redis>=5.0",
+]
+
+[tool.setuptools]
+packages = ["jobqueue"]

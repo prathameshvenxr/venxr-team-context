@@ -1,0 +1,4 @@
+fastapi==0.115.*
+uvicorn[standard]==0.30.*   # sandbox/Dockerfile (inline, no requirements.txt)
+pandas==2.2.2               # sandbox/runner/Dockerfile
+numpy==1.26.4               # sandbox/runner/Dockerfile

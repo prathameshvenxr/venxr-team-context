@@ -1,0 +1,5 @@
+uvicorn
+httpx
+# Google Ads (free official Python client)
+google-ads==32.0.0
+mcp==1.28.1

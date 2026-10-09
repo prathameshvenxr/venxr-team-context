@@ -1,0 +1,14 @@
+# local / generated
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+node_modules/
+# never commit credentials or exports from real environments
+*.pem
+*.key
+*.sqlite3

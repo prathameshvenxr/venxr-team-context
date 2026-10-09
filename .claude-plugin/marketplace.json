@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "venxr-team",
+  "description": "Venxr engineering plugins: workspace rules, loop-driven development and a stack-specific security reviewer.",
+  "owner": { "name": "Venxr engineering" },
+  "plugins": [
+    {
+      "name": "venxr-engineering",
+      "description": "adsgpt/Venxr workspace guide, a bounded loop-driven development skill (ponytail-based) and a read-only security reviewer agent.",
+      "version": "0.1.0",
+      "source": "./plugins/venxr-engineering",
+      "category": "development"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+mcp[cli]
+uvicorn
+google-cloud-dataproc
+google-cloud-storage
+openpyxl

@@ -1,0 +1,3 @@
+# Runtime dependencies for the jobqueue package.
+celery>=5.3
+redis>=5.0

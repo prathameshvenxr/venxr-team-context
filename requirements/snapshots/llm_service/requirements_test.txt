@@ -1,0 +1,7 @@
+pytest>=8.0
+pytest-asyncio>=0.23
+# Property-based testing. Required by agent/tests/test_resolution_invariants.py,
+# which proves the entity-resolution gate's invariants over generated adversarial
+# name sets rather than a fixed list of examples. Test-only — agent/resolution
+# itself is pure stdlib and adds no runtime dependency.
+hypothesis>=6.100

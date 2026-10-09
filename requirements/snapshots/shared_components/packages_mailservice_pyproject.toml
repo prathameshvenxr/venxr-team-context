@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "venxr-mailservice"
+version = "0.1.0"
+description = "Transactional email for Venxr services over Amazon SES — one sender, retryable-vs-permanent failure semantics, no framework dependency."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "boto3>=1.28",
+]
+
+# The queue worker (mailservice.worker + mailservice.tasks). Optional so a
+# service that only sends inline — `from mailservice import EmailService` — is
+# not forced to install Celery and Redis.
+#   pip install -e packages/mailservice[worker]
+[project.optional-dependencies]
+worker = [
+    "celery>=5.3",
+    "redis>=5.0",
+]
+
+[tool.setuptools]
+packages = ["mailservice"]
